@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import { Atmosphere } from './components/Atmosphere'
 import { FilterBar } from './components/FilterBar'
+import { IntroSplash } from './components/IntroSplash'
 import { KpiCards } from './components/KpiCards'
 import { LoadingSkeleton } from './components/LoadingSkeleton'
 import { Sidebar, type NavId } from './components/Sidebar'
@@ -83,15 +84,16 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeNav, setActiveNav] = useState<NavId>('overview')
   const [range, setRange] = useState<TimeRange>('30d')
+  const [showIntro, setShowIntro] = useState(true)
   const [initialLoading, setInitialLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
   const [data, setData] = useState(() => getDashboardData('30d'))
   const keywordsSpotlight = useSpotlight()
   const healthSpotlight = useSpotlight()
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => setInitialLoading(false), 1200)
-    return () => window.clearTimeout(timer)
+  const handleIntroComplete = useCallback(() => {
+    setShowIntro(false)
+    window.setTimeout(() => setInitialLoading(false), 450)
   }, [])
 
   useEffect(() => {
@@ -131,6 +133,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen text-apex-text">
+      {showIntro && <IntroSplash onComplete={handleIntroComplete} />}
+
       <Atmosphere />
 
       {isDesktop && (

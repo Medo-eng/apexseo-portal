@@ -384,14 +384,240 @@ body {
   z-index: 20 !important;
 }
 
+/* —— Intro splash —— */
+.intro-splash {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 40%, rgba(99, 102, 241, 0.18), transparent 60%),
+    #070a12;
+  animation: intro-root-in 0.45s var(--ease-out-expo) both;
+}
+
+.intro-splash--exit {
+  pointer-events: none;
+}
+
+.intro-splash--exit .intro-splash__wipe {
+  transform: scaleY(1);
+}
+
+.intro-splash--exit .intro-splash__mark,
+.intro-splash--exit .intro-splash__eyebrow,
+.intro-splash--exit .intro-splash__title,
+.intro-splash--exit .intro-splash__tagline,
+.intro-splash--exit .intro-splash__track,
+.intro-splash--exit .intro-splash__status {
+  opacity: 0;
+  transform: translateY(-12px) scale(0.98);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s var(--ease-out-expo);
+}
+
+.intro-splash__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 45%, black, transparent 75%);
+  opacity: 0;
+  animation: intro-fade-in 0.8s 0.15s var(--ease-out-expo) both;
+}
+
+.intro-splash__orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.intro-splash__orb--a {
+  width: 320px;
+  height: 320px;
+  top: 15%;
+  left: 20%;
+  background: #4f46e5;
+  animation: intro-orb-a 2.4s var(--ease-out-expo) both;
+}
+
+.intro-splash__orb--b {
+  width: 280px;
+  height: 280px;
+  bottom: 10%;
+  right: 18%;
+  background: #059669;
+  animation: intro-orb-b 2.4s 0.1s var(--ease-out-expo) both;
+}
+
+.intro-splash__mark {
+  position: relative;
+  opacity: 0;
+  animation: intro-mark 0.7s 0.15s var(--ease-out-expo) both;
+}
+
+.intro-splash__mark-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35),
+    transparent 45%
+  );
+}
+
+.intro-splash__eyebrow {
+  opacity: 0;
+  animation: intro-fade-up 0.55s 0.35s var(--ease-out-expo) both;
+}
+
+.intro-splash__title {
+  display: flex;
+  gap: 0.2em;
+  justify-content: center;
+}
+
+.intro-splash__word {
+  display: inline-block;
+  opacity: 0;
+  animation: intro-word 0.65s 0.45s var(--ease-out-expo) both;
+}
+
+.intro-splash__word--accent {
+  background: linear-gradient(120deg, #818cf8 0%, #6366f1 45%, #34d399 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation-delay: 0.55s;
+}
+
+.intro-splash__tagline {
+  opacity: 0;
+  animation: intro-fade-up 0.55s 0.7s var(--ease-out-expo) both;
+}
+
+.intro-splash__track {
+  opacity: 0;
+  animation: intro-fade-up 0.45s 0.85s var(--ease-out-expo) both;
+}
+
+.intro-splash__bar {
+  transform: scaleX(0);
+  animation: intro-bar 1.35s 0.95s var(--ease-out-expo) both;
+}
+
+.intro-splash__status {
+  opacity: 0;
+  animation: intro-fade-up 0.45s 1.05s var(--ease-out-expo) both;
+}
+
+.intro-splash__wipe {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: #070a12;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.65s var(--ease-out-expo);
+}
+
+@keyframes intro-root-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes intro-mark {
+  from {
+    opacity: 0;
+    transform: scale(0.7) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes intro-word {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes intro-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes intro-orb-a {
+  from {
+    opacity: 0;
+    transform: translate(-40px, 20px) scale(0.8);
+  }
+  to {
+    opacity: 0.4;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes intro-orb-b {
+  from {
+    opacity: 0;
+    transform: translate(40px, -20px) scale(0.8);
+  }
+  to {
+    opacity: 0.35;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .orb,
   .apex-atmosphere::before,
   .animate-fade-in-up,
   .animate-chart-fade,
   .progress-bar-fill,
-  .range-pill-active {
+  .range-pill-active,
+  .intro-splash,
+  .intro-splash * {
     animation: none !important;
+    transition: none !important;
   }
 
   .spotlight-card:hover {
